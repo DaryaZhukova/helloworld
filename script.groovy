@@ -28,7 +28,7 @@ def file = new File("${path}/artifact.tar.gz")
 def rest = new RESTClient( "http://192.168.17.4/repository/${repo}")
 	rest.auth.basic 'admin', 'admin123'
         rest.encoder.'application/war' = this.&encodeWarFile
-        rest.put( path:  "http://192.168.17.4/repository/${repo}/${gav[1]}/${buildnumber}/${gav[1]}-${buildnumber}.tar.gz", body: file, requestContentType: 'application/war')
+        rest.put( path:  "http://192.168.17.4/repository/${repo}/${gav[0]}/${gav[1]}/${buildnumber}/${gav[1]}-${buildnumber}.tar.gz", body: file, requestContentType: 'application/war')
 
 
 def encodeWarFile( Object data ) throws UnsupportedEncodingException {
