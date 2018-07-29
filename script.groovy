@@ -1,14 +1,13 @@
-@Grapes([
-@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.7'),
-@GrabConfig(systemClassLoader=true)
-])
+@Grapes(
+@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.7')
+)
 import groovyx.net.http.RESTClient
 import org.apache.http.entity.*
 import hudson.model.*
-import hudson.EnvVars
-EnvVars envVars = build.getEnvironment(listener);
-def path = envVars.get('WORKSPACE');
-def buildnumber = envVars.get('BUILD_NUMBER')
+//import hudson.EnvVars
+//EnvVars envVars = build.getEnvironment(listener);
+def path = System.getenv('WORKSPACE');
+def buildnumber = System.getenv('BUILD_NUMBER')
 def repo = "maven-helloworld"
 String[] parse_gav() {
         def pom = new XmlSlurper().parse(new File('/opt/jenkins/workspace/build_helloworld/pom.xml'))
