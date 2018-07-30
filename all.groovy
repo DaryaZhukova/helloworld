@@ -37,7 +37,7 @@ def download(def path) {
    def rest = new RESTClient( "http://192.168.17.4/repository/${repo}")
         rest.auth.basic 'admin', 'admin123'
         def resp = rest.get( path:  "${path}")
-   new File("./${name}.war") << resp.data
+   new File("./${name}.tar.gz") << resp.data
 }
 
 def cli = new CliBuilder(usage:'ls')
