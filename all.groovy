@@ -9,8 +9,8 @@ def encodeTarFile( Object data ) throws UnsupportedEncodingException {
    entity.setContentType( "application/tar.gz" );
    return entity
    }
-String[] parse_gav() {
-        def pom = new XmlSlurper().parse(new File('/opt/jenkins/workspace/build_helloworld/pom.xml'))
+String[] parse_gav(path) {
+        def pom = new XmlSlurper().parse(new File("${path}/pom.xml"))
         def gavs = []
         gavs.add(pom.groupId)
         gavs.add(pom.artifactId)
@@ -21,7 +21,7 @@ def upload() {
    def path = System.getenv('WORKSPACE');
    def buildnumber = System.getenv('BUILD_NUMBER')
    def repo = "maven-helloworld"
-   def gav = parse_gav()
+   def gav = parse_gav(path)
    def file = new File("${path}/artifact.tar.gz")
    def rest = new RESTClient( "http://192.168.17.4/repository/${repo}")
         rest.auth.basic 'admin', 'admin123'
