@@ -16,6 +16,8 @@ def encodeZipFile( Object data ) throws UnsupportedEncodingException {
 }
 
 def upload() {
+def WORKSPACE = System.getenv('WORKSPACE');
+def BUILD_NUMBER = System.getenv('BUILD_NUMBER')
    def repo = "maven-helloworld"
    def gav = parse_gav()
    def file = new File("pipeline-dzhukova-${BUILD_NUMBER}.tar.gz")
