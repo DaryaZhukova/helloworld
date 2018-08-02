@@ -26,7 +26,7 @@ def upload() {
         rest.put(path: "http://192.168.17.4/nexus/repository/${repo}/${gav[1]}/${BUILD_NUMBER}/${gav[1]}-${BUILD_NUMBER}.tar.gz", body: file, requestContentType: 'application/zip')
 
 }
-String[] parse_gav() {
+def String[] parse_gav() {
         def pom = new XmlSlurper().parse(new File("${WORKSPACE}/helloworld-ws/pom.xml"))
         def gavs = []
         gavs.add(pom.parent.groupId)
