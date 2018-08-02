@@ -23,10 +23,10 @@ def upload() {
    def repo = "maven-helloworld"
    def gav = parse_gav(path)
    def file = new File("${path}/artifact.tar.gz")
-   def rest = new RESTClient( "http://192.168.17.4/repository/${repo}")
+   def rest = new RESTClient( "http://192.168.17.4/nexus/repository/${repo}")
         rest.auth.basic 'user', 'user'
         rest.encoder.'application/tar.gz' = this.&encodeTarFile
-        rest.put( path:  "http://192.168.17.4/repository/${repo}/${gav[0]}/${gav[1]}/${buildnumber}/${gav[1]}-${buildnumber}.tar.gz", body: file, requestContentType: 'application/tar.gz')
+        rest.put( path:  "http://192.168.17.4/nexus/repository/${repo}/${gav[0]}/${gav[1]}/${buildnumber}/${gav[1]}-${buildnumber}.tar.gz", body: file, requestContentType: 'application/tar.gz')
 
 }
 
@@ -34,7 +34,7 @@ def upload() {
 def download(def path) {
    name = path.split("/")[6]
    def repo = "maven-helloworld"
-   def rest = new RESTClient( "http://192.168.17.4/repository/${repo}")
+   def rest = new RESTClient( "http://192.168.17.4/nexus/repository/${repo}")
         rest.auth.basic 'user', 'user'
         def resp = rest.get( path:  "${path}")
    new File("./${name}.tar.gz") << resp.data
