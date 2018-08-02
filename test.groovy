@@ -29,6 +29,7 @@ def BUILD_NUMBER = System.getenv('BUILD_NUMBER')
 
 }
 def parse_gav() {
+def WORKSPACE = System.getenv('WORKSPACE');
         def pom = new XmlSlurper().parse(new File("${WORKSPACE}/helloworld-ws/pom.xml"))
         def gavs = []
         gavs.add(pom.parent.groupId)
